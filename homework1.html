@@ -142,6 +142,24 @@
             <p>The result of floating point arithmetic can vary based on the order of operations due to the above errors. For example, <em>(a + b) + c</em> may yield a different result than <em>a + (b + c)</em>, leading to inconsistent results.</p>
         </li>
     </ul>
+    <p>
+        Errors can build up when processing large datasets or conducting repeated calculations, which can compromise the accuracy of results. 
+        Donald Knuth, a prominent computer scientist, addressed these computational challenges through his research. He introduced 
+        methods to improve floating-point precision, including:
+    </p>
+    
+    <h5>Robust Algorithm Design</h5>
+    <p>
+        Knuth advocated for algorithms that minimize the risk of rounding errors and catastrophic cancellation. 
+        By carefully selecting and structuring numerical methods, it’s possible to perform calculations that 
+        better preserve precision, reducing the likelihood of inaccuracies.
+    </p>
+    
+    <h5>Kahan Summation Technique</h5>
+    <p>
+        This approach minimizes errors when summing a series of floating-point numbers. It compensates for small inaccuracies 
+        during the addition process, which improves the overall precision of the final result.
+    </p>
                 <h2>Practice</h2>
                 <h4>Simulation Settings</h4>
     <form id="settingsForm">
