@@ -7,8 +7,27 @@
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        /* Ensuring the body takes the full height of the viewport */
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        /* Flexbox setup */
         body {
-            padding-top: 56px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1; /* Allow main content to grow */
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #f8f9fa; /* Light background for footer */
+            text-align: center;
+            padding: 1rem 0; /* Padding for footer */
         }
     </style>
 </head>
@@ -49,12 +68,14 @@
                     </div>
                 </div>
             </div>
-
-            
         </div>
     </main>
 
     <!-- Footer -->
+    <footer class="bg-light text-center py-4">
+        <p>&copy; 2024 My Blog. All Rights Reserved.</p>
+    </footer>
+
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
