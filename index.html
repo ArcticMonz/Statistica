@@ -3,156 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Cumulative Server Penetration Simulation</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Statistica 24/25</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 56px;
+        }
+    </style>
 </head>
 <body>
-    <h2>Simulation Settings</h2>
-    <form id="settingsForm">
-        <label for="numServers">Number of Servers (n):</label>
-        <input type="number" id="numServers" name="numServers" min="1" value="10" required><br><br>
-        
-        <label for="numAttackers">Number of Attackers (m):</label>
-        <input type="number" id="numAttackers" name="numAttackers" min="1" value="5" required><br><br>
-        
-        <label for="penetrationProbability">Probability (p):</label>
-        <input type="number" id="penetrationProbability" name="penetrationProbability" min="0" max="1" step="0.1" value="0.4" required><br><br>
-        
-        <button type="submit">Run Simulation</button>
-    </form>
 
-    <canvas id="penetrationChart" width="800" height="400"></canvas>
-    <canvas id="distributionChart" width="800" height="200" style="margin-top: 30px;"></canvas>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <a class="navbar-brand" href="#">Statistics</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-    <script>
-        const penetrationCtx = document.getElementById('penetrationChart').getContext('2d');
-        const distributionCtx = document.getElementById('distributionChart').getContext('2d');
-        let penetrationChart, distributionChart;
+    <!-- Header -->
+    <header class="bg-primary text-white text-center py-5">
+        <h1>Statistics 2024/2025</h1>
+        <p>Homeworks for the course of Statistics</p>
+    </header>
 
-        // Function to simulate cumulative penetration
-        function simulateCumulativePenetration(n, m, p) {
-            let results = Array(m).fill().map(() => [0]);
-            let penetrationCounts = Array(m).fill(0);
+    <!-- Main Content -->
+    <main class="container mt-4">
+        <div class="row">
+            <div class="col-md-8">
+                <h2>Articles</h2>
+                <!-- Article 1 -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="homework1.html">Homework 1</a></h5>
+                        <p class="card-text">Homework 1 theory and practice</p>
+                        <a href="homework1.html" class="btn btn-primary">Read</a>
+                    </div>
+                </div>
+            </div>
 
-            for (let i = 0; i < m; i++) {
-                let cumulative = 0;
-                for (let j = 0; j < n; j++) {
-                    if (Math.random() < p) {
-                        cumulative += 1;
-                    }
-                    results[i].push(cumulative);
-                }
-                penetrationCounts[i] = cumulative;
-            }
+            
+        </div>
+    </main>
 
-            // Count number of attackers that penetrated a specific number of servers
-            const distribution = {};
-            for (let count of penetrationCounts) {
-                distribution[count] = (distribution[count] || 0) + 1;
-            }
+    <!-- Footer -->
+    <footer class="bg-light text-center py-4">
+        <p>&copy; 2024 My Blog. All Rights Reserved.</p>
+    </footer>
 
-            return { results, distribution };
-        }
-
-        // Function to create or update the penetration chart
-        function updatePenetrationChart(n, m, p) {
-            const { results, distribution } = simulateCumulativePenetration(n, m, p);
-            const labels = Array.from({ length: n }, (_, i) => `Server ${i+1}`);
-            const datasets = results.map((result, index) => ({
-                label: `Attacker ${index+1}`,
-                data: result,
-                borderColor: `rgba(${Math.random()*255}, ${Math.random()*255}, ${Math.random()*255}, 0.7)`,
-                fill: false,
-                stepped: true
-            }));
-
-            // Update or create the line chart
-            if (penetrationChart) {
-                penetrationChart.data.labels = ['Start', ...labels];
-                penetrationChart.data.datasets = datasets;
-                penetrationChart.update();
-            } else {
-                penetrationChart = new Chart(penetrationCtx, {
-                    type: 'line',
-                    data: {
-                        labels: ['Start', ...labels],
-                        datasets: datasets
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                type: 'linear',
-                                min: 0,
-                                max: n,
-                                position: 'left'
-                            }
-                        },
-                        plugins: {
-                            tooltip: { mode: 'index', intersect: false }
-                        }
-                    }
-                });
-            }
-
-            // Generate the distribution chart with the updated data
-            updateDistributionChart(distribution, n);
-        }
-
-        // Function to create or update the distribution chart
-        function updateDistributionChart(distribution, maxServers) {
-            const distributionLabels = Array.from({ length: maxServers + 1 }, (_, i) => `${i}`);
-            const distributionData = distributionLabels.map(label => distribution[label] || 0);
-
-            if (distributionChart) {
-                distributionChart.data.labels = distributionLabels;
-                distributionChart.data.datasets[0].data = distributionData;
-                distributionChart.update();
-            } else {
-                distributionChart = new Chart(distributionCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: distributionLabels,
-                        datasets: [{
-                            label: 'Number of Attackers',
-                            data: distributionData,
-                            backgroundColor: 'rgba(0, 123, 255, 0.7)',
-                            borderColor: 'rgba(0, 123, 255, 1)',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                type: 'linear',
-                                min: 0,
-                                ticks: { precision: 0 }
-                            },
-                            x: {
-                                title: {
-                                    display: true,
-                                    text: 'Servers Penetrated'
-                                }
-                            }
-                        },
-                        plugins: {
-                            tooltip: { mode: 'index', intersect: false }
-                        }
-                    }
-                });
-            }
-        }
-
-        // Form submission handler
-        document.getElementById('settingsForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const n = parseInt(document.getElementById('numServers').value);
-            const m = parseInt(document.getElementById('numAttackers').value);
-            const p = parseFloat(document.getElementById('penetrationProbability').value);
-            updatePenetrationChart(n, m, p);
-        });
-
-        // Initial render
-        updatePenetrationChart(10, 5, 0.4);
-    </script>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
