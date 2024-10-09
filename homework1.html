@@ -119,11 +119,11 @@
         // Function to create or update the penetration chart
         function updatePenetrationChart(n, m, p) {
             const { results, distribution } = simulateCumulativePenetration(n, m, p);
-            const labels = Array.from({ length: n }, (_, i) => `Server ${i+1}`);
+            const labels = Array.from({ length: n }, (_, i) => `Server ${i + 1}`);
             const datasets = results.map((result, index) => ({
-                label: `Attacker ${index+1}`,
+                label: `Attacker ${index + 1}`,
                 data: result,
-                borderColor: `rgba(${Math.random()*255}, ${Math.random()*255}, ${Math.random()*255}, 0.7)`,
+                borderColor: `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.7)`,
                 fill: false,
                 stepped: true
             }));
@@ -132,6 +132,7 @@
             if (penetrationChart) {
                 penetrationChart.data.labels = ['Start', ...labels];
                 penetrationChart.data.datasets = datasets;
+                penetrationChart.options.scales.y.max = n; // Set dynamic maximum based on input
                 penetrationChart.update();
             } else {
                 penetrationChart = new Chart(penetrationCtx, {
@@ -145,7 +146,7 @@
                             y: {
                                 type: 'linear',
                                 min: 0,
-                                max: n,
+                                max: n, // Set initial max value
                                 position: 'left'
                             }
                         },
