@@ -110,8 +110,40 @@
             
 
                 </p>
+                <h4>Floating Point Representation</h4>
+    <p>Floating point representation is a method used in computers to represent real numbers, allowing for a wide range of values to be expressed with a finite number of bits. It mimics scientific notation, where numbers are expressed as a significant (or mantissa) and an exponent. The general format is:</p>
+    <p><strong>value = sign × mantissa × 2<sup>exponent</sup></strong></p>
+    
+    <p>In this representation:</p>
+    <ul>
+        <li>The <strong>sign</strong> bit indicates whether the number is positive or negative.</li>
+        <li>The <strong>mantissa</strong> contains the significant digits of the number.</li>
+        <li>The <strong>exponent</strong> determines the scale or range of the number.</li>
+    </ul>
+
+    <h4>Problems Associated with Floating Point Representation</h4>
+    <ul>
+        <li><strong>Catastrophic Cancellation:</strong>
+            <p>This occurs when subtracting two nearly equal numbers, leading to a significant loss of precision. For example, in the calculation <em>a - b</em> where <em>a</em> and <em>b</em> are close in value, the significant digits can cancel out, resulting in a less accurate result. This is particularly problematic in iterative calculations or algorithms that rely on small differences.</p>
+        </li>
+        <li><strong>Overflow:</strong>
+            <p>Overflow happens when a computed value exceeds the maximum limit that can be represented within the allocated bits. This can lead to incorrect results, such as wrapping around to a negative number in two's complement representation or returning infinity.</p>
+        </li>
+        <li><strong>Underflow:</strong>
+            <p>Underflow occurs when a value is too small to be represented in the floating point format, leading to values being rounded down to zero. This can cause issues in computations, particularly when small values are significant to the result.</p>
+        </li>
+        <li><strong>Precision Loss:</strong>
+            <p>Floating point numbers have limited precision, typically around 7 to 15 decimal digits (depending on whether single or double precision is used). When performing arithmetic operations on large numbers or very small numbers, precision can be lost, affecting the accuracy of results.</p>
+        </li>
+        <li><strong>Rounding Errors:</strong>
+            <p>Because many decimal fractions cannot be exactly represented in binary (e.g., 0.1), rounding occurs during conversions between formats. Accumulated rounding errors can lead to inaccuracies in long calculations.</p>
+        </li>
+        <li><strong>Non-associativity:</strong>
+            <p>The result of floating point arithmetic can vary based on the order of operations due to the above errors. For example, <em>(a + b) + c</em> may yield a different result than <em>a + (b + c)</em>, leading to inconsistent results.</p>
+        </li>
+    </ul>
                 <h2>Practice</h2>
-                <h3>Simulation Settings</h3>
+                <h4>Simulation Settings</h4>
     <form id="settingsForm">
         <label for="numServers">Number of Servers (n):</label>
         <input type="number" id="numServers" name="numServers" min="1" value="10" required><br><br>
