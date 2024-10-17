@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_HTML"></script>
+    <title>Homework 2 - Statistica 24/25</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 56px; /* Adjust padding for the fixed navbar */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Make sure the body takes the full height */
+        }
+
+        main {
+            flex: 1; /* Allow main to grow and take available space */
+        }
+
+        header {
+            padding-top: 100px; /* Space from the top */
+            padding-bottom: 100px; /* Space at the bottom */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center content vertically */
+            align-items: center; /* Center content horizontally */
+            text-align: center; /* Center text */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <a class="navbar-brand" href="#">Statistics</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-primary text-white">
+        <h1>Homework 2</h1>
+        <p>Details and insights on Homework 2 for the Statistics course.</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Theory</h2>
+                <h4 id="Section1">1. Theory</h4>
+<br>
+<h4>Welford's Recursion</h4>
+
+<p>The Welford recursion is used to compute the mean and variance in a numerically stable way. The recursive formulas are as follows:</p>
+
+<div class="equation">
+    <p>Mean:</p>
+    <p>
+        $$ \mu_n = \mu_{n-1} + \frac{x_n - \mu_{n-1}}{n} $$
+    </p>
+</div>
+
+<div class="equation">
+    <p>Variance:</p>
+    <p>
+        $$ M_n = M_{n-1} + (x_n - \mu_{n-1}) \cdot (x_n - \mu_n) $$
+    </p>
+</div>
+
+<p>Where:</p>
+<ul>
+    <li>$$ \mu_n $$ is the mean after the n-th observation.</li>
+    <li>$$ M_n $$ is an intermediate value used to compute the variance.</li>
+    <li>$$ x_n $$ is the n-th data point.</li>
+</ul>
+
+<p>The variance is computed by:</p>
+<div class="equation">
+    <p>
+        $$ \sigma_n^2 = \frac{M_n}{n-1} $$
+    </p>
+</div>
+               
+                <h2>Practice</h2>
+                <h4>Simulation Settings</h4>
+    
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-light text-center py-4">
+        <p>&copy; 2024 My Blog. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
