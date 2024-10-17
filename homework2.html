@@ -95,7 +95,203 @@
                
                 <h2>Practice</h2>
                 <h4>Simulation Settings</h4>
-    
+                <form id="settingsForm">
+                    <label for="numSteps">Number of Steps (n):</label>
+                    <input type="number" id="numSteps" value="10" min="1" required><br><br>
+            
+                    <label for="numTrajectories">Number of Trajectories (m):</label>
+                    <input type="number" id="numTrajectories" value="5" min="1" required><br><br>
+            
+                    <label for="probability">Probability (p):</label>
+                    <input type="number" id="probability" value="0.5" min="0" max="1" step="0.1" required><br><br>
+            
+                    <label for="variant">Variant:</label>
+                    <select id="variant">
+                        <option value="penetration">Penetration</option>
+                        <option value="jump">Jump</option>
+                    </select><br><br>
+            
+                    <label for="intermediateStep">Intermediate Step (k):</label>
+                    <input type="number" id="intermediateStep" value="1" min="1" required><br><br>
+            
+                    <button type="submit">Run Simulation</button>
+                </form>
+            
+                <button id="absoluteButton">Absolute</button>
+                <button id="relativeButton">Relative</button>
+            
+                <canvas id="penetrationChart" width="800" height="400"></canvas>
+                <canvas id="finalDistributionChart" width="800" height="400"></canvas>
+                <div id="finalStats" class="stats"></div>
+                <canvas id="intermediateDistributionChart" width="800" height="400"></canvas>
+                <div id="intermediateStats" class="stats"></div>
+            
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const form = document.getElementById('settingsForm');
+                        const absoluteButton = document.getElementById('absoluteButton');
+                        const relativeButton = document.getElementById('relativeButton');
+                        const penetrationCtx = document.getElementById('penetrationChart').getContext('2d');
+                        const finalDistributionCtx = document.getElementById('finalDistributionChart').getContext('2d');
+                        const intermediateDistributionCtx = document.getElementById('intermediateDistributionChart').getContext('2d');
+                        let penetrationChart, finalDistributionChart, intermediateDistributionChart;
+                        let currentFrequencyMode = 'absolute';
+            
+                        form.addEventListener('submit', function (event) {
+                            event.preventDefault();
+                            runSimulation();
+                        });
+            
+                        absoluteButton.addEventListener('click', function () {
+                            currentFrequencyMode = 'absolute';
+                            runSimulation();
+                        });
+            
+                        relativeButton.addEventListener('click', function () {
+                            currentFrequencyMode = 'relative';
+                            runSimulation();
+                        });
+            
+                        function runSimulation() {
+                            const n = parseInt(document.getElementById('numSteps').value);
+                            const m = parseInt(document.getElementById('numTrajectories').value);
+                            const p = parseFloat(document.getElementById('probability').value);
+                            const variant = document.getElementById('variant').value;
+                            const k = parseInt(document.getElementById('intermediateStep').value);
+            
+                            const { results, finalDistribution, intermediateDistribution, stats, intermediateStats } = simulateTrajectories(n, m, p, variant, k);
+            
+                            updatePenetrationChart(results);
+                            updateFinalDistributionChart(finalDistribution, stats);
+                            updateIntermediateDistributionChart(intermediateDistribution, intermediateStats);
+                        }
+            
+                        function simulateTrajectories(n, m, p, variant, k) {
+                            let results = Array(m).fill().map(() => [0]);
+                            let finalCounts = Array(m).fill(0);
+            
+                            for (let i = 0; i < m; i++) {
+                                let cumulative = 0;
+                                for (let j = 0; j < n; j++) {
+                                    cumulative += (Math.random() < p) ? 1 : -1;
+                                    results[i].push(cumulative);
+                                }
+                                finalCounts[i] = cumulative;
+                            }
+            
+                            let intermediateCounts = results.map(traj => traj[Math.min(k, n)]);
+                            const finalDistribution = calculateDistribution(finalCounts);
+                            const intermediateDistribution = calculateDistribution(intermediateCounts);
+                            const stats = calculateStats(finalCounts);
+                            const intermediateStats = calculateStats(intermediateCounts);
+            
+                            return { results, finalDistribution, intermediateDistribution, stats, intermediateStats };
+                        }
+            
+                        function calculateDistribution(counts) {
+                            const min = Math.min(...counts);
+                            const max = Math.max(...counts);
+                            const distribution = {};
+                            for (let i = min; i <= max; i++) {
+                                distribution[i] = 0;
+                            }
+                            counts.forEach(count => {
+                                distribution[count]++;
+                            });
+                            return distribution;
+                        }
+            
+                        function calculateStats(counts) {
+                            const n = counts.length;
+                            const mean = counts.reduce((sum, count) => sum + count, 0) / n;
+                            const variance = counts.reduce((sum, count) => sum + Math.pow(count - mean, 2), 0) / n;
+                            return { mean, variance };
+                        }
+            
+                        function updatePenetrationChart(results) {
+                            const labels = results[0].map((_, idx) => `Step ${idx}`);
+                            const datasets = results.map((result, i) => {
+                                const data = result.map((value, step) => 
+                                    currentFrequencyMode === 'relative' && step > 0 ? value / step : value
+                                );
+                                return {
+                                    label: `Trajectory ${i + 1}`,
+                                    data: data,
+                                    borderColor: `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 1)`,
+                                    fill: false
+                                };
+                            });
+            
+                            if (penetrationChart) penetrationChart.destroy();
+                            penetrationChart = new Chart(penetrationCtx, {
+                                type: 'line',
+                                data: { labels, datasets },
+                                options: {
+                                    responsive: true,
+                                    title: { display: true, text: `Trajectories (${currentFrequencyMode === 'relative' ? 'Relative Frequency' : 'Absolute'})` },
+                                    scales: {
+                                        y: {
+                                            title: {
+                                                display: true,
+                                                text: currentFrequencyMode === 'relative' ? 'Relative Frequency' : 'Score'
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                        }
+            
+                        function updateFinalDistributionChart(finalDist, stats) {
+                            const labels = Object.keys(finalDist).map(Number).sort((a, b) => a - b);
+                            const finalData = labels.map(label => finalDist[label]);
+            
+                            if (finalDistributionChart) finalDistributionChart.destroy();
+                            finalDistributionChart = new Chart(finalDistributionCtx, {
+                                type: 'bar',
+                                data: {
+                                    labels,
+                                    datasets: [{
+                                        label: 'Final Distribution',
+                                        data: finalData,
+                                        backgroundColor: 'rgba(75, 192, 192, 0.6)'
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    title: { display: true, text: `Final Distribution` }
+                                }
+                            });
+            
+                            document.getElementById('finalStats').textContent = 
+                                `Final Mean: ${stats.mean.toFixed(2)}, Final Variance: ${stats.variance.toFixed(2)}`;
+                        }
+            
+                        function updateIntermediateDistributionChart(interDist, interStats) {
+                            const labels = Object.keys(interDist).map(Number).sort((a, b) => a - b);
+                            const interData = labels.map(label => interDist[label]);
+            
+                            if (intermediateDistributionChart) intermediateDistributionChart.destroy();
+                            intermediateDistributionChart = new Chart(intermediateDistributionCtx, {
+                                type: 'bar',
+                                data: {
+                                    labels,
+                                    datasets: [{
+                                        label: 'Intermediate Distribution',
+                                        data: interData,
+                                        backgroundColor: 'rgba(153, 102, 255, 0.6)'
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    title: { display: true, text: `Intermediate Distribution` }
+                                }
+                            });
+            
+                            document.getElementById('intermediateStats').textContent = 
+                                `Intermediate Mean: ${interStats.mean.toFixed(2)}, Intermediate Variance: ${interStats.variance.toFixed(2)}`;
+                        }
+                    });
+                </script>
             </div>
         </div>
     </main>
