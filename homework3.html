@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_HTML"></script>
+    <title>Homework 1 - Statistica 24/25</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 56px; /* Adjust padding for the fixed navbar */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Make sure the body takes the full height */
+        }
+
+        main {
+            flex: 1; /* Allow main to grow and take available space */
+        }
+
+        header {
+            padding-top: 100px; /* Space from the top */
+            padding-bottom: 100px; /* Space at the bottom */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center content vertically */
+            align-items: center; /* Center content horizontally */
+            text-align: center; /* Center text */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <a class="navbar-brand" href="#">Statistics</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-primary text-white">
+        <h1>Homework 3</h1>
+        <p>Details and insights on Homework 3 for the Statistics course.</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Why the Median Minimizes the Sum of Absolute Deviations</h2>
+    
+    <p>
+        Given a set of data points \( x_1, x_2, \dots, x_n \) (sorted in increasing order without loss of generality), 
+        we want to find the value of \( c \) that minimizes the function:
+    </p>
+
+    \[
+    S(c) = \sum_{i=1}^{n} |x_i - c|
+    \]
+
+    <h4>1. Analyzing the behavior of \( S(c) \)</h4>
+    <p>
+        The function \( S(c) = \sum_{i=1}^{n} |x_i - c| \) sums the absolute deviations of each data point \( x_i \) from \( c \).
+        The absolute value function behaves as follows:
+    </p>
+    \[
+    |x_i - c| = 
+    \begin{cases} 
+      x_i - c & \text{if } c \leq x_i \\
+      c - x_i & \text{if } c > x_i 
+    \end{cases}
+    \]
+
+    <p>This means that \( S(c) \) changes its form depending on where \( c \) lies in relation to the \( x_i \)'s.</p>
+
+    <h4>2. Behavior of \( S(c) \) as \( c \) moves</h4>
+    <ul>
+        <li>
+            When \( c \) is smaller than most of the \( x_i \)'s (on the far left of the data), increasing \( c \) tends 
+            to decrease the larger positive deviations and increase the smaller negative ones. Hence, as \( c \) increases, the total sum \( S(c) \) decreases.
+        </li>
+        <li>
+            When \( c \) is larger than most of the \( x_i \)'s (on the far right), decreasing \( c \) tends to decrease the larger positive 
+            deviations and increase the smaller negative ones. Hence, as \( c \) decreases, the total sum \( S(c) \) decreases.
+        </li>
+    </ul>
+
+    <h4>3. Subgradient Analysis</h4>
+    <p>
+        Even though the absolute value function is not differentiable at every point, we can use the idea of subgradients. The subgradient of the 
+        absolute value function \( |x_i - c| \) is:
+    </p>
+
+    \[
+    \text{subgradient of } |x_i - c| = 
+    \begin{cases} 
+      -1 & \text{if } c < x_i \\
+      0 & \text{if } c = x_i \\
+      1 & \text{if } c > x_i 
+    \end{cases}
+    \]
+
+    <p>
+        Now, consider the derivative (or subgradient) of \( S(c) \):
+    </p>
+
+    \[
+    S'(c) = \sum_{i=1}^{n} \text{sgn}(x_i - c)
+    \]
+
+    <p>Where \( \text{sgn}(x_i - c) \) is the sign function, which outputs -1, 0, or 1 based on the relative value of \( x_i \) and \( c \).</p>
+
+    <ul>
+        <li>When \( c \) is less than the median, more than half of the terms contribute positive values (since \( x_i - c > 0 \)).</li>
+        <li>When \( c \) is greater than the median, more than half of the terms contribute negative values (since \( x_i - c < 0 \)).</li>
+        <li>The point where the sum of the subgradients changes sign is exactly when \( c \) is the <strong>median</strong>.</li>
+    </ul>
+
+    <h4>4. Minimizing the Sum of Absolute Deviations</h4>
+    <p>
+        To minimize \( S(c) \), we seek the value of \( c \) such that the sum of the subgradients equals zero, or equivalently, 
+        the number of terms for which \( x_i > c \) equals the number of terms for which \( x_i < c \). This balance occurs precisely 
+        when \( c \) is the <strong>median</strong> of the data set. At the median:
+    </p>
+
+    <ul>
+        <li>Half of the data points are smaller than \( c \), and half are larger than \( c \), minimizing the total sum of deviations.</li>
+    </ul>
+
+    <h4>Conclusion</h4>
+    <p>
+        The median minimizes the sum of absolute deviations because it equally balances the number of data points on either side of it, minimizing the 
+        total sum of positive and negative deviations. Any other value of \( c \) would shift this balance and increase the sum of absolute deviations.
+    </p>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-light text-center py-4">
+        <p>&copy; 2024 My Blog. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
