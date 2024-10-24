@@ -58,7 +58,7 @@
     <main class="container mt-4">
         <div class="row">
             <div class="col-md-12">
-                <h2>Why the Median Minimizes the Sum of Absolute Deviations</h2>
+                <h4>Why the Median Minimizes the Sum of Absolute Deviations</h4>
     
     <p>
         Given a set of data points \( x_1, x_2, \dots, x_n \) (sorted in increasing order without loss of generality), 
@@ -142,6 +142,137 @@
     <p>
         The median minimizes the sum of absolute deviations because it equally balances the number of data points on either side of it, minimizing the 
         total sum of positive and negative deviations. Any other value of \( c \) would shift this balance and increase the sum of absolute deviations.
+    </p>
+
+    <hr>
+
+    <h4>Different Ways to Define Location Statistics</h4>
+    
+    <p>
+        Measures of "location," also called central tendency or center, represent the "typical" value of a data distribution. These statistics synthesize data with a single number, providing insight into where the center or balance of the data lies. Below are the different conceptual ways to define location statistics, each with a distinct approach.
+    </p>
+
+    <h4>1. Arithmetic Mean</h4>
+    <p>
+        The <strong>arithmetic mean</strong>, or average, is the most common measure of central tendency, defined as:
+    </p>
+    \[
+    \mu = \frac{1}{n} \sum_{i=1}^{n} x_i
+    \]
+    <p>
+        It is the sum of all values divided by the number of values, minimizing the sum of squared deviations from itself. It is particularly effective for symmetric distributions.
+    </p>
+
+    <h4>2. Median</h4>
+    <p>
+        The <strong>median</strong> is the middle value in a sorted dataset. It divides the dataset into two equal halves and minimizes the sum of absolute deviations:
+    </p>
+    \[
+    \text{Median} = \arg\min_{c} \sum_{i=1}^{n} |x_i - c|
+    \]
+    <p>
+        The median is robust to outliers and gives a better summary of skewed data than the mean.
+    </p>
+
+    <h4>3. Mode</h4>
+    <p>
+        The <strong>mode</strong> is the value that appears most frequently in the dataset. In continuous distributions, the mode is the point where the probability density function (PDF) is maximized.
+    </p>
+    <p>
+        The mode is particularly useful when you need to identify the most frequent value in a dataset or the peak in a distribution.
+    </p>
+
+    <h4>4. Geometric Mean</h4>
+    <p>
+        The <strong>geometric mean</strong> is defined as the nth root of the product of n values:
+    </p>
+    \[
+    \text{Geometric Mean} = \left( \prod_{i=1}^{n} x_i \right)^{1/n}
+    \]
+    <p>
+        It is useful when the data involve multiplicative processes, such as growth rates or ratios.
+    </p>
+
+    <h4>5. Harmonic Mean</h4>
+    <p>
+        The <strong>harmonic mean</strong> is another measure for averaging rates or ratios and is defined as:
+    </p>
+    \[
+    \text{Harmonic Mean} = \frac{n}{\sum_{i=1}^{n} \frac{1}{x_i}}
+    \]
+    <p>
+        The harmonic mean gives greater weight to smaller values and is often used in situations where small numbers dominate, such as averaging speeds.
+    </p>
+
+    <h4>6. Trimmed Mean</h4>
+    <p>
+        The <strong>trimmed mean</strong> removes a fixed percentage of the smallest and largest data points before calculating the mean, making it more robust to outliers.
+    </p>
+    <p>
+        It is especially useful when a dataset contains extreme values that might distort the mean.
+    </p>
+
+    <h4>7. Weighted Mean</h4>
+    <p>
+        The <strong>weighted mean</strong> allows each data point to have a different weight, reflecting its relative importance:
+    </p>
+    \[
+    \text{Weighted Mean} = \frac{\sum_{i=1}^{n} w_i x_i}{\sum_{i=1}^{n} w_i}
+    \]
+    <p>
+        It is useful when some data points should contribute more to the average than others.
+    </p>
+
+    <h4>8. Midrange</h4>
+    <p>
+        The <strong>midrange</strong> is the average of the maximum and minimum values in the dataset:
+    </p>
+    \[
+    \text{Midrange} = \frac{x_{\text{max}} + x_{\text{min}}}{2}
+    \]
+    <p>
+        This measure is highly sensitive to outliers but provides a quick sense of the range’s midpoint.
+    </p>
+
+    <h4>9. Quantiles and Percentiles</h4>
+    <p>
+        <strong>Quantiles</strong> divide the data into intervals. For instance, the 50th percentile is the median, the 25th percentile is the lower quartile, and the 75th percentile is the upper quartile.
+    </p>
+    <p>
+        Quantiles give insights into how data is distributed across different thresholds.
+    </p>
+
+    <h4>10. Fréchet Mean (Barycenter)</h4>
+    <p>
+        The <strong>Fréchet mean</strong> generalizes the mean to non-Euclidean spaces. It minimizes the sum of squared distances in a given metric space:
+    </p>
+    \[
+    \text{Fréchet Mean} = \arg\min_{c} \sum_{i=1}^{n} d(x_i, c)^2
+    \]
+    <p>
+        This concept is useful for complex data, such as points on a sphere or in a manifold.
+    </p>
+
+    <h4>11. M-estimators</h4>
+    <p>
+        <strong>M-estimators</strong> generalize the mean by minimizing functions of deviations rather than simple sums of squares or absolute values. An M-estimator minimizes a function \( \rho(x_i - c) \):
+    </p>
+    \[
+    \text{M-estimator} = \arg\min_{c} \sum_{i=1}^{n} \rho(x_i - c)
+    \]
+    <p>
+        These estimators are robust and can be tailored for specific types of data distributions.
+    </p>
+
+    <h4>12. Center of Mass (for Weighted Data)</h4>
+    <p>
+        The <strong>center of mass</strong> is another way to define the center of a distribution when dealing with weighted data. It is calculated as:
+    </p>
+    \[
+    \text{Center of Mass} = \frac{\sum_{i=1}^{n} m_i x_i}{\sum_{i=1}^{n} m_i}
+    \]
+    <p>
+        This measure emphasizes the "mass" (or importance) of each data point and is widely used in spatial and physical data analysis.
     </p>
 
             </div>
