@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_HTML"></script>
+    <title>Homework 4 - Statistica 24/25</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 56px; /* Adjust padding for the fixed navbar */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Make sure the body takes the full height */
+        }
+
+        main {
+            flex: 1; /* Allow main to grow and take available space */
+        }
+
+        header {
+            padding-top: 100px; /* Space from the top */
+            padding-bottom: 100px; /* Space at the bottom */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center content vertically */
+            align-items: center; /* Center content horizontally */
+            text-align: center; /* Center text */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <a class="navbar-brand" href="#">Statistics</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-primary text-white">
+        <h1>Homework 4</h1>
+        <p>Details and insights on Homework 4 for the Statistics course.</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Statistical Independence</h1>
+
+                <p>
+                    In statistics, <strong>independence</strong> refers to a situation where two variables are unrelated in such a way that knowing the value of one gives no information about the value of the other.
+                    Formally, if two random variables \( X \) and \( Y \) are independent, the distribution of \( Y \) is the same regardless of the value of \( X \), and vice versa.
+                </p>
+                
+                <h2>1. Formal Definition of Independence</h2>
+                
+                <p>
+                    Two random variables \( X \) and \( Y \) are statistically independent if their <strong>joint probability distribution</strong> \( P(X, Y) \) is equal to the product of their individual (marginal) distributions \( P(X) \) and \( P(Y) \):
+                </p>
+                
+                <p>
+                    \[
+                    P(X, Y) = P(X) \cdot P(Y)
+                    \]
+                </p>
+                
+                <p>
+                    This product rule implies that the likelihood of observing \( X \) and \( Y \) together is simply the product of their separate probabilities, which indicates that the two variables do not influence each other.
+                </p>
+                
+                <p>For continuous variables, statistical independence can be expressed as:</p>
+                
+                <p>
+                    \[
+                    f_{X,Y}(x, y) = f_X(x) \cdot f_Y(y)
+                    \]
+                </p>
+                
+                <p>
+                    where \( f_{X,Y}(x, y) \) is the joint probability density function of \( X \) and \( Y \), and \( f_X(x) \) and \( f_Y(y) \) are their respective marginal densities.
+                </p>
+                
+                <h2>2. Intuitive Meaning of Statistical Independence</h2>
+                
+                <p>
+                    If \( X \) and \( Y \) are independent, knowing the value of \( X \) doesn’t change our expectations or predictions about \( Y \), and vice versa.
+                    For example, if \( X \) represents the temperature in New York and \( Y \) represents the outcome of rolling a die in Tokyo, then knowing the temperature in New York gives us no information about the die roll’s outcome in Tokyo.
+                    Thus, these variables are independent in a statistical sense.
+                </p>
+                
+                <h2>3. Analogy with Uncorrelated Variables</h2>
+                
+                <p>
+                    Independence is a stronger property than being uncorrelated:
+                </p>
+                
+                <ul>
+                    <li><strong>Uncorrelated Variables:</strong> Two variables are uncorrelated if their covariance is zero (i.e., they have no linear relationship).</li>
+                    <li><strong>Independent Variables:</strong> Independence implies no relationship of any kind, not just linear. If \( X \) and \( Y \) are independent, they must be uncorrelated, but the reverse isn’t always true (uncorrelated variables may still be related in a nonlinear way).</li>
+                </ul>
+                
+                <h2>4. Visualization through Joint Distributions</h2>
+                
+                <p>
+                    To visualize independence, consider a <strong>joint distribution plot</strong> for two variables \( X \) and \( Y \):
+                </p>
+                
+                <ul>
+                    <li>If \( X \) and \( Y \) are independent, the plot will show no patterns or trends between them. Any pattern, slope, clustering, or relationship would suggest dependence.</li>
+                    <li>For independent variables, the joint probability distribution is simply the product of their marginal distributions, and a plot of this joint distribution often appears as a uniform scatter with no clustering or directional trend.</li>
+                </ul>
+                
+                <h2>5. Practical Example in Statistics</h2>
+                
+                <p>
+                    Suppose we are studying two variables:
+                </p>
+                
+                <ul>
+                    <li>\( X \): Height of a person</li>
+                    <li>\( Y \): Color of a person’s shoes</li>
+                </ul>
+                
+                <p>
+                    In this case, there’s no reason to believe a person’s shoe color depends on their height. Thus, these variables should be statistically independent:
+                </p>
+                
+                <p>
+                    \[
+                    P(\text{Height} = x, \text{Shoe Color} = y) = P(\text{Height} = x) \cdot P(\text{Shoe Color} = y)
+                    \]
+                </p>
+                
+                <h2>6. Why Independence Matters in Statistics</h2>
+                
+                <p>
+                    Independence assumptions simplify many statistical models. For instance:
+                </p>
+                
+                <ul>
+                    <li><strong>Regression Analysis:</strong> Independence of errors (residuals) is often assumed to ensure that predictions remain unbiased.</li>
+                    <li><strong>Sampling:</strong> Independent samples ensure that the sample accurately represents the population without internal dependencies, making it easier to generalize findings.</li>
+                    <li><strong>Statistical Tests:</strong> Many tests (e.g., chi-squared tests, t-tests) assume independence between observations or groups to validate results.</li>
+                </ul>
+                
+                <p>
+                    Understanding and testing for independence helps statisticians build models that accurately represent reality, free of hidden relationships that could skew analysis.
+                </p>
+
+    <hr>
+
+    <h2>Simulation Practice</h2>
+<h4>Settings</h4>
+<form id="settingsForm">
+    <label for="numServers">N parameter (n):</label>
+    <input type="number" id="numServers" name="numServers" min="1" value="5000" required><br><br>
+    
+    <label for="numAttackers">Number of Attackers (m):</label>
+    <input type="number" id="numAttackers" name="numAttackers" min="1" value="5" required><br><br>
+    
+    <label for="lambda">Lambda:</label>
+    <input type="number" id="lambda" name="lambda" min="0" step="0.1" value="1" required><br><br>
+    
+    <button type="submit">Run Simulation</button>
+</form>
+
+<canvas id="penetrationChart" width="800" height="400"></canvas>
+<canvas id="distributionChart" width="800" height="200" style="margin-top: 30px;"></canvas>
+
+<script>
+    const penetrationCtx = document.getElementById('penetrationChart').getContext('2d');
+    const distributionCtx = document.getElementById('distributionChart').getContext('2d');
+    let penetrationChart, distributionChart;
+
+    // Function to simulate cumulative penetration with square root jumps
+    function simulateCumulativePenetration(n, m, p) {
+        let results = Array(m).fill().map(() => [0]); // Stores penetration data for each attacker
+        let penetrationCounts = Array(m).fill(0); // Cumulative penetration per attacker
+
+        // Step size based on n
+        const stepSize = Math.sqrt(1 / n);
+
+        for (let i = 0; i < m; i++) {
+            let cumulative = 0;
+            for (let j = 0; j < n; j++) {
+                cumulative += Math.random() < p ? stepSize : -stepSize; // Apply jump based on success or failure
+                results[i].push(cumulative);
+            }
+            penetrationCounts[i] = cumulative; // Total penetration for each attacker after n steps
+        }
+
+        // Count number of attackers that achieved each penetration level (rounded)
+        const distribution = {};
+        for (let count of penetrationCounts) {
+            let roundedCount = count.toFixed(2); // Round for easier visualization
+            distribution[roundedCount] = (distribution[roundedCount] || 0) + 1;
+        }
+
+        return { results, distribution };
+    }
+
+    // Function to create or update the penetration chart
+    function updatePenetrationChart(n, m, lambda) {
+        const p = lambda / n; // Probability based on lambda and n
+        const { results, distribution } = simulateCumulativePenetration(n, m, p);
+
+        // Create labels for steps as fractions of n
+        const labels = Array.from({ length: n + 1 }, (_, i) => i === 0 ? "Start" : `${i}/${n}`);
+        
+        // Prepare datasets for each attacker with distinct colors
+        const colors = ['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#42d4f4', '#f032e6', '#bfef45', '#fabebe'];
+        const datasets = results.map((result, index) => ({
+            label: `Attacker ${index + 1}`,
+            data: result,
+            borderColor: colors[index % colors.length],
+            borderWidth: 2, // Increase line width for visibility
+            fill: false,
+            stepped: true
+        }));
+
+        // Render or update the penetration chart
+        if (penetrationChart) {
+            penetrationChart.destroy(); // Destroy the previous chart to re-render it
+        }
+        penetrationChart = new Chart(penetrationCtx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: datasets
+            },
+            options: {
+                scales: {
+                    y: {
+                        type: 'linear',
+                        position: 'left'
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Step (Fraction of n)'
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: { mode: 'index', intersect: false }
+                }
+            }
+        });
+
+        // Generate the distribution chart with the updated data
+        updateDistributionChart(distribution);
+    }
+
+    // Function to create or update the distribution chart
+    function updateDistributionChart(distribution) {
+        // Sort and set distribution data for visualization
+        const distributionLabels = Object.keys(distribution).sort((a, b) => parseFloat(a) - parseFloat(b));
+        const distributionData = distributionLabels.map(label => distribution[label] || 0);
+
+        // Update or create the distribution chart
+        if (distributionChart) {
+            distributionChart.destroy(); // Destroy previous chart to re-render it
+        }
+        distributionChart = new Chart(distributionCtx, {
+            type: 'bar',
+            data: {
+                labels: distributionLabels,
+                datasets: [{
+                    label: 'Number of Attackers',
+                    data: distributionData,
+                    backgroundColor: 'rgba(0, 123, 255, 0.7)',
+                    borderColor: 'rgba(0, 123, 255, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        type: 'linear',
+                        min: 0,
+                        ticks: { precision: 0 }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Penetration Count (rounded)'
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: { mode: 'index', intersect: false }
+                }
+            }
+        });
+    }
+
+    // Form submission handler
+    document.getElementById('settingsForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const n = parseInt(document.getElementById('numServers').value);
+        const m = parseInt(document.getElementById('numAttackers').value);
+        const lambda = parseFloat(document.getElementById('lambda').value);
+        updatePenetrationChart(n, m, lambda);
+    });
+
+    // Initial render with default values
+    updatePenetrationChart(365, 5, 120);
+</script>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-light text-center py-4">
+        <p>&copy; 2024 My Blog. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
