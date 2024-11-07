@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_HTML"></script>
+    <title>Homework 5 - Statistica 24/25</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 56px; /* Adjust padding for the fixed navbar */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Make sure the body takes the full height */
+        }
+
+        main {
+            flex: 1; /* Allow main to grow and take available space */
+        }
+
+        header {
+            padding-top: 100px; /* Space from the top */
+            padding-bottom: 100px; /* Space at the bottom */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center content vertically */
+            align-items: center; /* Center content horizontally */
+            text-align: center; /* Center text */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <a class="navbar-brand" href="#">Statistics</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-primary text-white">
+        <h1>Homework 5</h1>
+        <p>Details and insights on Homework 5 for the Statistics course.</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Cauchy-Schwarz Inequality, Independence, and Uncorrelation</h1>
+    
+                <!-- Cauchy-Schwarz Inequality Section -->
+                <h2>The Cauchy-Schwarz Inequality</h2>
+                <p>
+                    The <strong>Cauchy-Schwarz inequality</strong> is a fundamental result in linear algebra and analysis, particularly within inner product spaces. For vectors 
+                    \( \mathbf{a} \) and \( \mathbf{b} \) in an inner product space, the inequality states:
+                </p>
+                <p>
+                    \[
+                    |\langle \mathbf{a}, \mathbf{b} \rangle| \leq \|\mathbf{a}\| \|\mathbf{b}\|
+                    \]
+                </p>
+                <p>
+                    where \( \langle \mathbf{a}, \mathbf{b} \rangle \) is the inner product (or dot product in \(\mathbb{R}^n\)) of \( \mathbf{a} \) and \( \mathbf{b} \), and 
+                    \( \|\mathbf{a}\| \) and \( \|\mathbf{b}\| \) denote the magnitudes (norms) of \( \mathbf{a} \) and \( \mathbf{b} \), respectively. Equality holds if and only 
+                    if \( \mathbf{a} \) and \( \mathbf{b} \) are linearly dependent, meaning one is a scalar multiple of the other.
+                </p>
+            
+                <h3>Proof of the Cauchy-Schwarz Inequality</h3>
+                <ol>
+                    <li>
+                        <p>
+                            <strong>Define a function of a scalar \( t \):</strong><br>
+                            Consider a scalar \( t \) and the vector \( \mathbf{a} - t \mathbf{b} \). The norm squared of this vector is always non-negative:
+                        </p>
+                        <p>
+                            \[
+                            \|\mathbf{a} - t \mathbf{b}\|^2 \geq 0.
+                            \]
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <strong>Expand the norm squared:</strong><br>
+                            Expanding \( \|\mathbf{a} - t \mathbf{b}\|^2 \) using the properties of the inner product:
+                        </p>
+                        <p>
+                            \[
+                            \|\mathbf{a} - t \mathbf{b}\|^2 = \langle \mathbf{a} - t \mathbf{b}, \mathbf{a} - t \mathbf{b} \rangle.
+                            \]
+                        </p>
+                        <p>
+                            Applying the distributive property of the inner product, this becomes:
+                        </p>
+                        <p>
+                            \[
+                            = \langle \mathbf{a}, \mathbf{a} \rangle - 2t \langle \mathbf{a}, \mathbf{b} \rangle + t^2 \langle \mathbf{b}, \mathbf{b} \rangle.
+                            \]
+                        </p>
+                        <p>
+                            Using the notation \( \|\mathbf{a}\|^2 = \langle \mathbf{a}, \mathbf{a} \rangle \) and \( \|\mathbf{b}\|^2 = \langle \mathbf{b}, \mathbf{b} \rangle \), 
+                            we rewrite this as:
+                        </p>
+                        <p>
+                            \[
+                            \|\mathbf{a} - t \mathbf{b}\|^2 = \|\mathbf{a}\|^2 - 2t \langle \mathbf{a}, \mathbf{b} \rangle + t^2 \|\mathbf{b}\|^2.
+                            \]
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <strong>View as a quadratic inequality in \( t \):</strong><br>
+                            Since \( \|\mathbf{a} - t \mathbf{b}\|^2 \geq 0 \) for all \( t \), the expression
+                        </p>
+                        <p>
+                            \[
+                            \|\mathbf{a}\|^2 - 2t \langle \mathbf{a}, \mathbf{b} \rangle + t^2 \|\mathbf{b}\|^2 \geq 0
+                            \]
+                        </p>
+                        <p>
+                            must hold for all \( t \). This is a quadratic inequality in \( t \), which implies that its discriminant must be less than or equal to zero for the 
+                            inequality to hold universally.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <strong>Calculate the discriminant:</strong><br>
+                            The discriminant of the quadratic \( \|\mathbf{b}\|^2 t^2 - 2 \langle \mathbf{a}, \mathbf{b} \rangle t + \|\mathbf{a}\|^2 \) is:
+                        </p>
+                        <p>
+                            \[
+                            \Delta = (-2 \langle \mathbf{a}, \mathbf{b} \rangle)^2 - 4 \|\mathbf{b}\|^2 \|\mathbf{a}\|^2 = 4 \langle \mathbf{a}, \mathbf{b} \rangle^2 - 4 
+                            \|\mathbf{a}\|^2 \|\mathbf{b}\|^2.
+                            \]
+                        </p>
+                        <p>
+                            Simplifying, we find:
+                        </p>
+                        <p>
+                            \[
+                            \Delta = 4 \left( \langle \mathbf{a}, \mathbf{b} \rangle^2 - \|\mathbf{a}\|^2 \|\mathbf{b}\|^2 \right).
+                            \]
+                        </p>
+                        <p>
+                            For the inequality to hold for all \( t \), we require \( \Delta \leq 0 \), which implies:
+                        </p>
+                        <p>
+                            \[
+                            \langle \mathbf{a}, \mathbf{b} \rangle^2 \leq \|\mathbf{a}\|^2 \|\mathbf{b}\|^2.
+                            \]
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <strong>Take square roots:</strong><br>
+                            Taking the square root of both sides (and noting that both sides are non-negative), we arrive at the Cauchy-Schwarz inequality:
+                        </p>
+                        <p>
+                            \[
+                            |\langle \mathbf{a}, \mathbf{b} \rangle| \leq \|\mathbf{a}\| \|\mathbf{b}\|.
+                            \]
+                        </p>
+                    </li>
+                </ol>
+                <p>This completes the proof of the Cauchy-Schwarz inequality.</p>
+            
+                <!-- Independence and Uncorrelation Section -->
+                <h2>Independence and Uncorrelation</h2>
+                
+                <h3>1. Independence</h3>
+                <p>
+                    Two random variables \( X \) and \( Y \) are <strong>independent</strong> if the occurrence of one does not affect the probability of the occurrence of the other. 
+                    Formally, \( X \) and \( Y \) are independent if:
+                </p>
+                <p>
+                    \[
+                    P(X = x \text{ and } Y = y) = P(X = x) \cdot P(Y = y)
+                    \]
+                </p>
+                <p>
+                    for all values of \( x \) and \( y \). In terms of their joint probability distribution, \( X \) and \( Y \) are independent if their joint distribution 
+                    factorizes as the product of their individual (marginal) distributions:
+                </p>
+                <p>
+                    \[
+                    f_{X,Y}(x, y) = f_X(x) \cdot f_Y(y).
+                    \]
+                </p>
+                <p>
+                    <strong>Interpretation:</strong> Independence implies a complete lack of association between \( X \) and \( Y \), meaning that knowing the value of \( X \) gives 
+                    no information about the value of \( Y \), and vice versa.
+                </p>
+            
+                <h3>2. Uncorrelation</h3>
+                <p>
+                    Two random variables \( X \) and \( Y \) are <strong>uncorrelated</strong> if their <strong>covariance</strong> is zero:
+                </p>
+                <p>
+                    \[
+                    \operatorname{Cov}(X, Y) = \mathbb{E}[(X - \mathbb{E}[X])(Y - \mathbb{E}[Y])] = 0.
+                    \]
+                </p>
+                <p>
+                    Since the covariance is the expected value of the product of deviations from their means, a covariance of zero indicates that \( X \) and \( Y \) do not have 
+                    a linear relationship.
+                </p>
+            
+                <h3>Conceptual Differences</h3>
+                <ul>
+                    <li><strong>Strength of Condition:</strong> Independence implies no relationship of any kind, while uncorrelation only implies no linear relationship.</li>
+                    <li><strong>Implication:</strong> Independence implies uncorrelation, but uncorrelation does not imply independence.</li>
+                    <li><strong>Measurement:</strong> Independence is determined by verifying the factorization of the joint distribution, while uncorrelation is quantified by 
+                        the covariance or correlation coefficient.
+                    </li>
+                </ul>
+            
+                <h3>Example</h3>
+                <p>
+                    Consider a random variable \( X \) that is uniformly distributed over \([-1, 1]\), and let \( Y = X^2 \). Here:
+                </p>
+                <ul>
+                    <li>\( X \) and \( Y \) are <strong>uncorrelated</strong> because \( \operatorname{Cov}(X, Y) = 0 \).</li>
+                    <li>However, \( X \) and \( Y \) are <strong>not independent</strong> because knowing the value of \( Y \) provides information about the magnitude of \( X \).</li>
+                </ul>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-light text-center py-4">
+        <p>&copy; 2024 My Blog. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
