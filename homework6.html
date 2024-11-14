@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_HTML"></script>
+    <title>Homework 6 - Statistica 24/25</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 56px; /* Adjust padding for the fixed navbar */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Make sure the body takes the full height */
+        }
+
+        main {
+            flex: 1; /* Allow main to grow and take available space */
+        }
+
+        header {
+            padding-top: 100px; /* Space from the top */
+            padding-bottom: 100px; /* Space at the bottom */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center content vertically */
+            align-items: center; /* Center content horizontally */
+            text-align: center; /* Center text */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <a class="navbar-brand" href="#">Statistics</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-primary text-white">
+        <h1>Homework 6</h1>
+        <p>Details and insights on Homework 6 for the Statistics course.</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                
+                <h1>The Fundamental Theorem of Calculus and its Relationship to PDFs and CDFs</h1>
+
+<p>
+    The <strong>Fundamental Theorem of Calculus</strong> (FTC) connects differentiation and integration, providing a powerful tool to evaluate integrals and understand the behavior of functions.
+    Here’s a statement of the theorem and how it relates to <strong>density functions</strong> and <strong>cumulative distribution functions (CDFs)</strong> in probability.
+</p>
+
+<h2>1. Statement of the Fundamental Theorem of Calculus</h2>
+
+<p>The Fundamental Theorem of Calculus has two main parts:</p>
+
+<ol>
+    <li>
+        <strong>Part 1</strong>: If \( F \) is an antiderivative of \( f \) on an interval \( [a, b] \), then:
+        \[
+        \int_a^b f(x) \, dx = F(b) - F(a).
+        \]
+    </li>
+    <li>
+        <strong>Part 2</strong>: If \( f \) is a continuous real-valued function on an interval \( [a, b] \) and we define a function \( F \) by:
+        \[
+        F(x) = \int_a^x f(t) \, dt,
+        \]
+        then \( F \) is differentiable on \( (a, b) \) and \( F'(x) = f(x) \).
+    </li>
+</ol>
+
+<h2>2. Relationship to Density Functions and Cumulative Distribution Functions (CDFs)</h2>
+
+<p>In probability theory, the Fundamental Theorem of Calculus underpins the relationship between the <strong>probability density function</strong> (PDF) and the <strong>cumulative distribution function</strong> (CDF) of a continuous random variable.</p>
+
+<h3>Definitions:</h3>
+<ul>
+    <li>
+        <strong>Cumulative Distribution Function (CDF)</strong>, \( F(x) \): This function gives the probability that a random variable \( X \) takes a value less than or equal to \( x \). Formally,
+        \[
+        F(x) = P(X \leq x) = \int_{-\infty}^x f(t) \, dt,
+        \]
+        where \( f(t) \) is the probability density function (PDF) of \( X \).
+    </li>
+    <li>
+        <strong>Probability Density Function (PDF)</strong>, \( f(x) \): This function represents the density of probabilities at each point \( x \), and it is related to the CDF by differentiation:
+        \[
+        f(x) = F'(x).
+        \]
+    </li>
+</ul>
+
+<h3>Using the Fundamental Theorem of Calculus:</h3>
+
+<ol>
+    <li>
+        <strong>CDF as an Integral of the PDF</strong>:<br>
+        By definition, the CDF \( F(x) \) can be represented as the integral of the PDF from \(-\infty\) to \( x \):
+        \[
+        F(x) = \int_{-\infty}^x f(t) \, dt.
+        \]
+        This matches the form given in the Fundamental Theorem of Calculus, where \( F(x) \) is the integral of \( f(t) \) over the interval \( (-\infty, x] \).
+    </li>
+    <li>
+        <strong>PDF as the Derivative of the CDF</strong>:<br>
+        By the Fundamental Theorem of Calculus, since \( F(x) \) is the integral of \( f(t) \), we know that \( F(x) \) is differentiable, and:
+        \[
+        F'(x) = f(x).
+        \]
+        This result shows that the PDF is simply the derivative of the CDF, a fundamental relationship in probability theory.
+    </li>
+</ol>
+
+<h2>3. Intuitive Explanation in Terms of Probability</h2>
+
+<p>
+    The relationship \( f(x) = F'(x) \) has a practical interpretation:
+</p>
+<ul>
+    <li>The CDF \( F(x) = P(X \leq x) \) represents the accumulated probability up to \( x \).</li>
+    <li>The PDF \( f(x) \) gives the "rate" at which this accumulated probability changes at \( x \).</li>
+</ul>
+<p>
+    For small changes \( dx \) in \( x \), the probability of \( X \) falling within a narrow interval \( [x, x + dx] \) is approximately \( f(x) \, dx \). This interpretation stems directly from the fundamental theorem, as it implies that the density function \( f(x) \) is the instantaneous rate of change of the cumulative probability.
+</p>
+
+<h2>4. Example</h2>
+
+<p>Consider a continuous random variable \( X \) with a PDF \( f(x) = 3x^2 \) over the interval \( [0,1] \).</p>
+
+<ol>
+    <li>
+        <strong>Finding the CDF \( F(x) \)</strong>:<br>
+        \[
+        F(x) = \int_0^x 3t^2 \, dt = x^3 \quad \text{for } x \in [0, 1].
+        \]
+    </li>
+    <li>
+        <strong>Confirming the PDF as the Derivative of the CDF</strong>:<br>
+        Using the Fundamental Theorem of Calculus:
+        \[
+        F'(x) = \frac{d}{dx} x^3 = 3x^2 = f(x).
+        \]
+    </li>
+</ol>
+
+<p>Thus, the FTC verifies that the PDF \( f(x) = 3x^2 \) is indeed the derivative of the CDF \( F(x) = x^3 \).</p>
+
+<br>
+
+<h1>Discrete Distribution Simulation</h1>
+    
+    <div class="input-group">
+        <label for="sampleSize">Sample Size:</label>
+        <input type="number" id="sampleSize" value="100" min="1" step="1">
+    </div>
+
+    <div class="input-group">
+        <label for="numValues">Number of Unique Values:</label>
+        <input type="number" id="numValues" value="3" min="1" step="1">
+    </div>
+
+    <div class="input-group" id="probabilityInputs">
+        <!-- Dynamically generated probability inputs go here -->
+    </div>
+
+    <button id="generateButton">Generate Samples</button>
+
+    <div class="result-display" id="meanVarianceDisplay">
+        <p>Theoretical and Empirical Mean and Variance will be displayed here.</p>
+    </div>
+
+    <canvas id="distributionCanvas"></canvas>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const probabilityContainer = document.getElementById("probabilityInputs");
+    const meanVarianceDisplay = document.getElementById("meanVarianceDisplay");
+    let distributionChart = null;
+
+    function updateProbabilityInputs() {
+        probabilityContainer.innerHTML = '';
+        const numValues = parseInt(document.getElementById("numValues").value);
+        for (let i = 0; i < numValues; i++) {
+            const inputGroup = document.createElement("div");
+            inputGroup.classList.add("input-group");
+
+            inputGroup.innerHTML = `
+                <label for="prob_${i}">Probability p${i}:</label>
+                <input type="number" id="prob_${i}" class="probability-input" min="0" max="1" step="0.01" value="${(1 / numValues).toFixed(2)}">
+            `;
+            probabilityContainer.appendChild(inputGroup);
+        }
+    }
+
+    function generateSample(values, probabilities) {
+        const rand = Math.random();
+        let cumulative = 0;
+        for (let i = 0; i < probabilities.length; i++) {
+            cumulative += probabilities[i];
+            if (rand < cumulative) return values[i];
+        }
+        return values[values.length - 1];
+    }
+
+    function runSimulation() {
+        const numValues = parseInt(document.getElementById("numValues").value);
+        const sampleSize = parseInt(document.getElementById("sampleSize").value);
+        
+        const values = Array.from({ length: numValues }, (_, i) => i);
+        const probabilities = Array.from({ length: numValues }, (_, i) =>
+            parseFloat(document.getElementById(`prob_${i}`).value)
+        );
+
+        if (Math.abs(probabilities.reduce((a, b) => a + b) - 1) > 0.01) {
+            alert("Probabilities must sum to approximately 1.");
+            return;
+        }
+
+        const empiricalCounts = Array(numValues).fill(0);
+        let empiricalMean = 0;
+        let varianceAcc = 0;
+
+        for (let i = 0; i < sampleSize; i++) {
+            const sample = generateSample(values, probabilities);
+            empiricalCounts[sample]++;
+            const delta = sample - empiricalMean;
+            empiricalMean += delta / (i + 1);
+            varianceAcc += delta * (sample - empiricalMean);
+        }
+        
+        const empiricalProbabilities = empiricalCounts.map(count => count / sampleSize);
+        const empiricalVariance = varianceAcc / sampleSize;
+
+        displayResults(empiricalMean, empiricalVariance, values, probabilities);
+        plotDistribution(values, empiricalProbabilities, probabilities);
+    }
+
+    function displayResults(empiricalMean, empiricalVariance, values, probabilities) {
+        const theoreticalMean = probabilities.reduce((sum, p, i) => sum + p * values[i], 0);
+        const theoreticalVariance = probabilities.reduce(
+            (sum, p, i) => sum + p * Math.pow(values[i] - theoreticalMean, 2), 0
+        );
+
+        meanVarianceDisplay.innerHTML = `
+            <p><strong>Theoretical Mean:</strong> ${theoreticalMean.toFixed(4)}</p>
+            <p><strong>Empirical Mean:</strong> ${empiricalMean.toFixed(4)}</p>
+            <p><strong>Theoretical Variance:</strong> ${theoreticalVariance.toFixed(4)}</p>
+            <p><strong>Empirical Variance:</strong> ${empiricalVariance.toFixed(4)}</p>
+        `;
+    }
+
+    function plotDistribution(values, empiricalProbs, theoreticalProbs) {
+        const ctx = document.getElementById("distributionCanvas").getContext("2d");
+        if (distributionChart) distributionChart.destroy();
+
+        distributionChart = new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: values.map(v => `Value ${v}`),
+                datasets: [
+                    {
+                        label: "Empirical Probability",
+                        data: empiricalProbs,
+                        backgroundColor: "rgba(255, 99, 132, 0.7)"
+                    },
+                    {
+                        label: "Theoretical Probability",
+                        data: theoreticalProbs,
+                        backgroundColor: "rgba(54, 162, 235, 0.7)"
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: value => `${(value * 100).toFixed(0)}%`
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    document.getElementById("numValues").addEventListener("change", updateProbabilityInputs);
+    document.getElementById("generateButton").addEventListener("click", runSimulation);
+    
+    updateProbabilityInputs(); // Initial setup
+});
+</script>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-light text-center py-4">
+        <p>&copy; 2024 My Blog. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
